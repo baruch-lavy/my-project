@@ -16,7 +16,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
     }),
   ],
   providers: [AdminService],
-  exports: [AdminService],
+  exports: [AdminService, SequelizeModule],
   controllers: [AdminController],
 })
 export class AdminModule {}

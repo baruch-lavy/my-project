@@ -35,10 +35,11 @@ export class adminSelfGuard implements CanActivate {
       }
 
       const user: payload = this.jwtService.verify(token);
-      if (user.role !== "ADMIN") {
+      if (user.role.toLocaleUpperCase() !== "ADMIN") {
         throw new UnauthorizedException("UNAUTHORIZED!");
       }
       const admin = await this.adminService.findOne(user.sub);
+      console.log(admin);
       if (user.sub != id || admin?.id != id || !admin.dataValues.is_verified) {
         throw new UnauthorizedException("404 NOT F0UND!");
       }

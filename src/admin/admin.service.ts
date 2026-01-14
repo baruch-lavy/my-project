@@ -1,14 +1,17 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { InjectModel } from "@nestjs/sequelize";
-import { errorHandler } from "../app/catchError";
-import { createAdminDto } from "./dto/adminRegister.dto";
-import { Admin } from "./entities/admin.entity";
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { errorHandler } from '../app/catchError';
+import { createAdminDto } from './dto/adminRegister.dto';
+import { Admin } from './entities/admin.entity';
+import { UpdateAdminDto } from './dto/updateAdmin.dto';
 
 @Injectable()
 export class AdminService {
   constructor(@InjectModel(Admin) private adminRepository: typeof Admin) {}
 
-  async createAdmin(createAdminDto: createAdminDto): Promise<Admin | undefined> {
+  async createAdmin(
+    createAdminDto: createAdminDto,
+  ): Promise<Admin | undefined> {
     try {
       return await this.adminRepository.create(createAdminDto as any);
     } catch (e) {
@@ -27,6 +30,18 @@ export class AdminService {
   async findOne(id: number): Promise<Admin | null | undefined> {
     try {
       return await this.adminRepository.findByPk(id);
+    } catch (e) {
+      errorHandler(e);
+    }
+  }
+
+  async update(id: number, updateAdminDto: UpdateAdminDto): Promise<Admin | undefined | null > {
+    try {
+      await this.adminRepository.update(
+        { ...updateAdminDto },
+        { where: { id } },
+      );
+      return await this.findOne(id);
     } catch (e) {
       errorHandler(e);
     }
@@ -54,7 +69,7 @@ export class AdminService {
         {
           is_verified: true,
         },
-        { where: { id } }
+        { where: { id } },
       );
     } catch (e) {
       errorHandler(e);
@@ -64,12 +79,11 @@ export class AdminService {
   async creator() {
     try {
       await this.adminRepository.update(
-        { is_verified: true},
-        { where: { email: "abdusalomovdev@gmail.com" } }
+        { is_verified: true },
+        { where: { email: 'baruchlavy@gmail.com' } },
       );
     } catch (e) {
       errorHandler(e);
     }
   }
-
 }

@@ -1,6 +1,6 @@
-import { Model, Column, DataType, Table } from "sequelize-typescript";
+import { Model, Column, DataType, Table } from 'sequelize-typescript';
 
-@Table({ tableName: "admin", timestamps: true })
+@Table({ tableName: 'admin', timestamps: true })
 export class Admin extends Model<Admin> {
   @Column({
     unique: true,
@@ -13,23 +13,28 @@ export class Admin extends Model<Admin> {
   @Column({
     type: DataType.STRING,
   })
-  name: string;
+  declare name: string;
 
   @Column({
     type: DataType.STRING,
     unique: true,
   })
-  email: string;
+  declare email: string;
 
   @Column({
     type: DataType.STRING,
   })
-  password: string;
+  declare password: string;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
   })
-  is_verified: boolean;
+  declare is_verified: boolean;
 
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  })
+  declare is_creator: boolean;
 }
