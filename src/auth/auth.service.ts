@@ -112,16 +112,17 @@ export class AuthService {
   private async validateAdmin(loginDto: LoginUserDto) {
     const admin = await this.adminService.getByEmail(loginDto.email);
     if (!admin) {
-      throw new NotFoundException("Bunday Admin TOpilmadi!");
+      throw new NotFoundException("admin not found");
     }
     const passwordEquels = await bcrypt.compare(
       loginDto.password,
       admin.password
     );
     if (admin && passwordEquels) {
+      console.log(admin);
       return admin;
     }
-    throw new UnauthorizedException("Email Yoki Parol Hato!");
+    throw new UnauthorizedException("Email not authorized");
   }
 
 

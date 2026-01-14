@@ -9,7 +9,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
 import { AdminService } from '../admin/admin.service';
 import { AdminModule } from '../admin/admin.module';
-import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
   imports: [

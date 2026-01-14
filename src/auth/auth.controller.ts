@@ -34,16 +34,20 @@ export class AuthController {
     return this.authService.logIn(signInDto);
   }
 
+  @Public()
   @Post('/admin/register')
   registerAdmin(@Body() createAdminDto: createAdminDto) {
     return this.authService.registerAdmin(createAdminDto);
   }
 
+  @Public()
   @Post('/admin/login')
   loginAdmin(@Body() loginDto: LoginUserDto) {
+    console.log('in login');
     return this.authService.loginAdmin(loginDto);
   }
-
+  
+  @Public()
   @Post('/admin/verify/:id')
   @UseGuards(creatorGuard)
   async verifyAdmin(@Param('id') id: number) {
