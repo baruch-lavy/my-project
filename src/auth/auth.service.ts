@@ -161,7 +161,7 @@ export class AuthService {
         throw new NotFoundException("admin with that id is not exist");
       }
       if (adminExists.is_verified) {
-        throw new BadRequestException("Bu admin uje verifikatsiyadan o'tgan!");
+        throw new BadRequestException("admin is already verified!");
       }
       await this.adminService.verify(id);
       return {
