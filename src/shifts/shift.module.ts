@@ -6,9 +6,10 @@ import { ShiftController } from './shift.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Shift } from './entities/shift.entity';
 import { ShiftService } from './shift.service';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports : [SequelizeModule.forFeature([Shift])],
+  imports : [SequelizeModule.forFeature([Shift]), AuthModule],
   controllers : [ShiftController],
   providers: [ShiftService],
   exports: [ShiftService, SequelizeModule], 

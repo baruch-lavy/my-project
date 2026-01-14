@@ -22,7 +22,6 @@ export class creatorGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req: Request = context.switchToHttp().getRequest();
     try {
-      const id = +req.params.id;
 
       const authHeader = req.headers.authorization;
       if (!authHeader) {
@@ -35,7 +34,7 @@ export class creatorGuard implements CanActivate {
       }
 
       const admin: payload = this.jwtService.verify(token);
-      if (admin.role !== "ADMIN") {
+      if (admin.role.toLocaleUpperCase() !== "ADMIN") {
         throw new UnauthorizedException("UNAUTHORIZED!");
       }
       const checkAdmin = await this.adminService.findOne(admin.sub);

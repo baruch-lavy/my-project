@@ -10,6 +10,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/user.module';
 import { ShiftModule } from '../shifts/shift.module';
 import { AssignmentsModule } from '../assignments/assignment.module';
+import { AdminModule } from '../admin/admin.module';
 
 //entities
 import { User } from '../users/entities/user.entity';
@@ -18,6 +19,7 @@ import { Assignment } from '../assignments/entities/assignment.entity';
 
 //config
 import { ConfigModule } from '@nestjs/config';
+import { Admin } from '../admin/entities/admin.entity';
 
 
 @Module({
@@ -27,6 +29,7 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     ShiftModule,
     AssignmentsModule,
+    AdminModule,
     SequelizeModule.forRoot({
       dialect: 'mysql',
       host: 'localhost',
@@ -34,7 +37,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.DATABASE_USER, 
       password: process.env.DATABASE_PASSWORD,
       database: 'gurding-system',
-      models: [User, Shift, Assignment],
+      models: [User, Shift, Assignment, Admin],
       autoLoadModels : true,
       synchronize : true
     }),

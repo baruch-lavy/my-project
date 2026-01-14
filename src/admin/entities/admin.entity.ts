@@ -13,28 +13,28 @@ export class Admin extends Model<Admin> {
   @Column({
     type: DataType.STRING,
   })
-  name: string;
+  declare name: string;
 
   @Column({
     type: DataType.STRING,
     unique: true,
   })
-  email: string;
+  declare email: string;
 
   @Column({
     type: DataType.STRING,
   })
-  password: string;
+  declare password: string;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
   })
-  is_verified: boolean;
+  declare is_verified: boolean;
 
   @Column({
     type: DataType.BOOLEAN,
     defaultValue: false,
   })
-  is_creator: boolean;
+  declare is_creator: boolean;
 }
